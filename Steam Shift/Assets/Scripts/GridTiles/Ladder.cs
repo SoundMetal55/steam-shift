@@ -4,32 +4,26 @@ using UnityEngine;
 
 public class Ladder : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    void OnCollisionEnter2D(Collision2D other)
-    {
-        Debug.Log("ladder entered");
-        if (other.transform.GetComponent<Engineer>() != null)
+        if (collision.tag == "Engineer")
         {
             Debug.Log("ladder entered");
+            collision.transform.GetComponent<Engineer>().colliders.Add("Ladder");
+            collision.transform.GetComponent<Engineer>().isClimbing = true;
         }
     }
 
-    void OnCollisionExit2D(Collision2D other)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        if (other.transform.GetComponent<Engineer>() != null)
+        if (collision.tag == "Engineer")
         {
-            Debug.Log("ladder exited");
+            collision.transform.GetComponent<Engineer>().colliders.Remove("Ladder");
+            if (collision.transform.GetComponent<Engineer>().colliders.Contains("Ladder"))
+            {
+                Debug.Log("ladder exited");
+                collision.transform.GetComponent<Engineer>().isClimbing = false;
+            }
         }
     }
 }
