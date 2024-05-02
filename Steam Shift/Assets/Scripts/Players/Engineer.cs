@@ -8,7 +8,7 @@ public class Engineer : MonoBehaviour
     public GameObject go;
     public Rigidbody2D rb;
     public SpriteRenderer sr;
-    public List<Collider2D> colliders = new List<Collider2D>();
+    public List<string> colliders = new List<string>();
 
     [Header("PipePlacement")]
     public GameObject pipe;
@@ -21,11 +21,13 @@ public class Engineer : MonoBehaviour
     [Header("Movement Y")]
     public float jumpForce;
     float vertical;
-    public bool isClimbing;
 
     [Header("Movement Status")]
-    public bool grounded = false;
-    public bool jumping = false;
+    public bool isClimbing;
+    public bool isFloating;
+    public bool isGrounded = false;
+    public bool canJump = false;
+    public bool isJumping = false;
     public Collider2D floorCollider;
     public ContactFilter2D floorFilter;
 
@@ -39,32 +41,11 @@ public class Engineer : MonoBehaviour
         jumpForce = 5f;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        colliders.Add(collision);
-        if (collision.tag == "Ladder")
-        {
-            isClimbing = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        colliders.Remove(collision);
-        if (collision.tag == "Ladder")
-        {
-            if (colliders.Contains(collision))
-            {
-                isClimbing = false;
-            }
-        }
-    }
-
     // Update is called once per frame
     void Update()
     {
         GetPlayerInputs();
-        SetJumpStatus();
+        SetMovementStatus();
     }
     
     void FixedUpdate()
@@ -88,12 +69,23 @@ public class Engineer : MonoBehaviour
         {
             rb.gravityScale = 1f;
             rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
-            if (!jumping && vertical == 1f)
+            if (canJump && vertical == 1f)
             {
-                jumping = true;
+                canJump = false;
+                isJumping = true;
                 rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             }
         }
+
+        if (isFloating)
+        {
+            if (rb.velocity.y <= 9.81f)
+            {
+                rb.AddForce(Vector2.up * 19.62f);
+                rb.velocity = new Vector2 (rb.velocity.x, Mathf.Clamp(rb.velocity.y, rb.velocity.y, 3f));
+            }
+        }
+
         FlipSprite();
     }
 
@@ -139,12 +131,17 @@ public class Engineer : MonoBehaviour
         }
     }
 
-    void SetJumpStatus()
+    void SetMovementStatus()
     {
-        grounded = floorCollider.IsTouching(floorFilter);
-        if (grounded && rb.velocity.y <= 0)
+        isGrounded = floorCollider.IsTouching(floorFilter);
+        if (isGrounded && rb.velocity.y <= 0)
         {
-            jumping = false;
+            canJump = true;
+            isJumping = false;
+        }
+        if (isFloating)
+        {
+            isClimbing = false;
         }
     }
 
