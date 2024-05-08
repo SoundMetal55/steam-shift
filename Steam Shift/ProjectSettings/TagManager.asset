@@ -7,6 +7,8 @@ TagManager:
   - Ladder
   - Suit
   - Engineer
+  - Steam
+  - Pipe
   layers:
   - Default
   - TransparentFX
@@ -20,9 +22,9 @@ TagManager:
   - EngineerBarrier
   - Barrier
   - Pipe
-  - 
-  - 
-  - 
+  - Suit
+  - PipeNotPlaceable
+  - Vent
   - 
   - 
   - 

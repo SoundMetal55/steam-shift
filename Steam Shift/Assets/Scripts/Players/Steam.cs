@@ -8,7 +8,12 @@ public class Steam : MonoBehaviour
     public GameObject go;
     public Rigidbody2D rb;
     public SpriteRenderer sr;
-    public List<Collider2D> colliders = new List<Collider2D>();
+    public List<string> colliders = new List<string>();
+
+    [Header("Suit")]
+    public bool canToggle;
+    public GameObject suit;
+    public GameObject vent;
 
     [Header("Movement X")]
     public float speed;
@@ -18,7 +23,8 @@ public class Steam : MonoBehaviour
     float vertical;
     public bool isClimbing;
 
-    [Header("Mode Status")]
+    [Header("Player Status")]
+    public bool isAtGoal;
     public bool isSuit;
 
     // Start is called before the first frame update
@@ -31,66 +37,79 @@ public class Steam : MonoBehaviour
         isSuit = false;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        colliders.Add(collision);
-        if (collision.tag == "Ladder")
-        {
-            isClimbing = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        colliders.Remove(collision);
-        if (collision.tag == "Ladder")
-        {
-            if (colliders.Contains(collision))
-            {
-                isClimbing = false;
-            }
-        }
-    }
-
     // Update is called once per frame
     void Update()
     {
         GetPlayerInputs();
+
+        if (!canToggle)
+        {
+            SetToggleStatus();
+        }
     }
 
     void FixedUpdate()
     {
         MovePlayer();
 
-        if (Input.GetKey(KeyCode.RightControl))
+        if (Input.GetKey(KeyCode.RightControl) && canToggle)
         {
-            ToggleSuitOn();
-        }
-        if (Input.GetKey(KeyCode.RightAlt))
-        {
-            ToggleSuitOff();
+            ToggleSuit();
         }
 
         isClimbing = false;
     }
 
-    void ToggleSuitOn()
+    void SetToggleStatus()
     {
-        if (true)
+        if (colliders.Contains("Vent") == false && colliders.Contains("Suit") == false)
         {
-            go.layer = LayerMask.NameToLayer("Engineer");
-            isSuit = true;
-            go.transform.localScale = new Vector2(0.8f, 1.6f);
+            canToggle = true;
         }
     }
 
-    void ToggleSuitOff()
+    void ToggleSuit()
     {
-        if (true)
+        canToggle = false;
+        if (!isSuit)
         {
-            go.layer = LayerMask.NameToLayer("Steam");
-            isSuit = false;
-            go.transform.localScale = new Vector2(0.8f, 0.8f);
+            RaycastHit2D[] tiles;
+            LayerMask mask = LayerMask.GetMask("Suit");
+            tiles = Physics2D.CircleCastAll(new Vector2(Mathf.Floor(rb.transform.position.x) + 0.4f, Mathf.Floor(rb.transform.position.y) + 0.4f), 0.5f, new Vector2(0f, 0f), 0.5f, mask);
+
+            if (colliders.Contains("Suit") && tiles != null)
+            {
+                foreach (RaycastHit2D tile in tiles)
+                {
+                    go.transform.position = tile.transform.position;
+                    Instantiate(vent, tile.transform.position, tile.transform.rotation);
+                    Destroy(tile.transform.gameObject);
+                }
+
+                go.layer = LayerMask.NameToLayer("Engineer");
+                isSuit = true;
+                go.transform.localScale = new Vector2(0.8f, 1.6f);
+            }
+        }
+        else
+        {
+            RaycastHit2D[] tiles;
+            LayerMask mask = LayerMask.GetMask("Vent");
+            tiles = Physics2D.CircleCastAll(new Vector2(Mathf.Floor(rb.transform.position.x) + 0.4f, Mathf.Floor(rb.transform.position.y) + 0.4f), 0.5f, new Vector2(0f, 0f), 0.5f, mask);
+
+            if (colliders.Contains("Vent") && tiles != null)
+            {
+                foreach (RaycastHit2D tile in tiles)
+                {
+                    go.transform.position = tile.transform.position;
+                    Instantiate(suit, tile.transform.position, tile.transform.rotation);
+                    Destroy(tile.transform.gameObject);
+                }
+
+                go.layer = LayerMask.NameToLayer("Steam");
+                isSuit = false;
+                go.transform.localScale = new Vector2(0.8f, 0.8f);
+            }
         }
     }
 

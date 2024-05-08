@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Engineer : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class Engineer : MonoBehaviour
     [Header("PipePlacement")]
     public GameObject pipe;
     public int numPipes;
+    public GameObject vent;
+    public int numVents;
 
     [Header("Movement X")]
     public float speed;
@@ -22,7 +25,8 @@ public class Engineer : MonoBehaviour
     public float jumpForce;
     float vertical;
 
-    [Header("Movement Status")]
+    [Header("Player Status")]
+    public bool isAtGoal;
     public bool isClimbing;
     public bool isFloating;
     public bool isGrounded = false;
