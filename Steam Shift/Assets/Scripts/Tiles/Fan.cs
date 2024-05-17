@@ -4,26 +4,31 @@ using UnityEngine;
 
 public class Fan : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D collision)
+    // debatable whether ladders should also have a script to handle physics changes or if fans should be handled in the player scripts. this works for now but will be rafactored)
+    public bool isOn;
+    public GameObject fanEffect;
+    public GameObject button;
+
+    void Start()
     {
-        if (collision.tag == "Engineer")
-        {
-            Debug.Log("fan entered");
-            collision.transform.GetComponent<Engineer>().colliders.Add("Fan");
-            collision.transform.GetComponent<Engineer>().isFloating = true;
-        }
+        isOn = false;
+        fanEffect.SetActive(false);
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    void Update()
     {
-        if (collision.tag == "Engineer")
+        fanEffect.SetActive(isOn);
+        isOn = button.GetComponent<PressableButton>().activating.Count != 0;
+    }
+
+    void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.tag == "Engineer" && isOn)
         {
-            collision.transform.GetComponent<Engineer>().colliders.Remove("Fan");
-            if (collision.transform.GetComponent<Engineer>().colliders.Contains("Fan"))
-            {
-                Debug.Log("fan exited");
-                collision.transform.GetComponent<Engineer>().isFloating = false;
-            }
+            Rigidbody2D rb = collision.GetComponent<Rigidbody2D>();
+            rb.AddForce(Vector2.up * 19.62f);
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, rb.velocity.y, 3f));
+            Debug.Log("floating");
         }
     }
 }

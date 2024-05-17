@@ -114,7 +114,6 @@ MonoBehaviour:
   jumpForce: 0
   isAtGoal: 0
   isClimbing: 0
-  isFloating: 0
   isGrounded: 0
   canJump: 0
   isJumping: 0
@@ -133,6 +132,7 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
+  isInteracting: 0
 --- !u!50 &3728902827064375600
 Rigidbody2D:
   serializedVersion: 4

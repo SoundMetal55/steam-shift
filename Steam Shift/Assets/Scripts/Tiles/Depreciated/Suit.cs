@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Suit : MonoBehaviour
 {
+    /*
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Steam")
@@ -24,4 +25,5 @@ public class Suit : MonoBehaviour
             }
         }
     }
+    */
 }

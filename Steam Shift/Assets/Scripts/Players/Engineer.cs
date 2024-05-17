@@ -28,12 +28,12 @@ public class Engineer : MonoBehaviour
     [Header("Player Status")]
     public bool isAtGoal;
     public bool isClimbing;
-    public bool isFloating;
     public bool isGrounded = false;
     public bool canJump = false;
     public bool isJumping = false;
     public Collider2D floorCollider;
     public ContactFilter2D floorFilter;
+    public bool isInteracting;
 
     // Start is called before the first frame update
     void Start()
@@ -62,6 +62,16 @@ public class Engineer : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        colliders.Add(collision.tag);
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        colliders.Remove(collision.tag);
+    }
+
+
     void MovePlayer()
     {
         if (isClimbing)
@@ -78,15 +88,6 @@ public class Engineer : MonoBehaviour
                 canJump = false;
                 isJumping = true;
                 rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            }
-        }
-
-        if (isFloating)
-        {
-            if (rb.velocity.y <= 9.81f)
-            {
-                rb.AddForce(Vector2.up * 19.62f);
-                rb.velocity = new Vector2 (rb.velocity.x, Mathf.Clamp(rb.velocity.y, rb.velocity.y, 3f));
             }
         }
 
@@ -133,19 +134,33 @@ public class Engineer : MonoBehaviour
         {
             vertical = 0f;
         }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            isInteracting = true;
+        }
+        if (Input.GetKeyUp(KeyCode.E))
+        {
+            isInteracting = false;
+        }
     }
 
     void SetMovementStatus()
     {
+        if (colliders.Contains("Ladder"))
+        {
+            isClimbing = true;
+        }
+        else
+        {
+            isClimbing = false;
+        }
+
         isGrounded = floorCollider.IsTouching(floorFilter);
         if (isGrounded && rb.velocity.y <= 0)
         {
             canJump = true;
             isJumping = false;
-        }
-        if (isFloating)
-        {
-            isClimbing = false;
         }
     }
 

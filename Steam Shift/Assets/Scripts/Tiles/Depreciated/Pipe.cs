@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Pipe : MonoBehaviour
 {
+    /*
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("pipe entered");
@@ -25,4 +26,5 @@ public class Pipe : MonoBehaviour
             }
         }
     }
+    */
 }

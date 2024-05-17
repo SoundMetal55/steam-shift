@@ -9,6 +9,9 @@ TagManager:
   - Engineer
   - Steam
   - Pipe
+  - Vent
+  - Goal
+  - Box
   layers:
   - Default
   - TransparentFX

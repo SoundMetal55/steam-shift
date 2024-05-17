@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Ladder : MonoBehaviour
 {
+
+    //handing collision here was a mistake. going back to handling colliders in the player class for now but it should eventually be put into a different script from movement.
+    /*
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Engineer")
@@ -26,4 +29,5 @@ public class Ladder : MonoBehaviour
             }
         }
     }
+    */
 }
