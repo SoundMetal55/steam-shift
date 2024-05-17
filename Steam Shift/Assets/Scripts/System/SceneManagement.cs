@@ -27,9 +27,9 @@ public class SceneManagement : MonoBehaviour
 
     void CheckWin()
     {
-        Debug.Log(engineer.GetComponent<Engineer>().isAtGoal.ToString() + "en");
-        Debug.Log(steam.GetComponent<Steam>().isAtGoal.ToString() + "st");
-        if (engineer.GetComponent<Engineer>().isAtGoal == true && steam.GetComponent<Steam>().isAtGoal == true)
+        Debug.Log(engineer.GetComponent<Engineer>().colliders.Contains("Goal") + "en");
+        Debug.Log(steam.GetComponent<Steam>().colliders.Contains("Goal").ToString() + "st");
+        if (engineer.GetComponent<Engineer>().colliders.Contains("Goal") == true && steam.GetComponent<Steam>().colliders.Contains("Goal") == true)
         {
             GoToNextLevel();
         }

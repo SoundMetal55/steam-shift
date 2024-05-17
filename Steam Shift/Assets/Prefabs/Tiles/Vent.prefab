@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6562776767083367993}
   m_Layer: 14
   m_Name: Vent
-  m_TagString: Untagged
+  m_TagString: Vent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

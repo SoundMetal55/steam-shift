@@ -26,6 +26,7 @@ public class Steam : MonoBehaviour
     [Header("Player Status")]
     public bool isAtGoal;
     public bool isSuit;
+    public bool isInteracting;
 
     // Start is called before the first frame update
     void Start()
@@ -46,13 +47,15 @@ public class Steam : MonoBehaviour
         {
             SetToggleStatus();
         }
+
+        
     }
 
     void FixedUpdate()
     {
         MovePlayer();
 
-        if (Input.GetKey(KeyCode.RightControl) && canToggle)
+        if (isInteracting && (canToggle || true))
         {
             ToggleSuit();
         }
@@ -60,8 +63,18 @@ public class Steam : MonoBehaviour
         isClimbing = false;
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        colliders.Add(collision.tag);
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        colliders.Remove(collision.tag);
+    }
+
     void SetToggleStatus()
     {
+        Debug.Log(canToggle);
         if (colliders.Contains("Vent") == false && colliders.Contains("Suit") == false)
         {
             canToggle = true;
@@ -175,6 +188,15 @@ public class Steam : MonoBehaviour
         else
         {
             vertical = 0f;
+        }
+        
+        if (Input.GetKeyDown(KeyCode.RightControl))
+        {
+            isInteracting = true;
+        }
+        if (Input.GetKeyUp(KeyCode.RightControl))
+        {
+            isInteracting = false;
         }
     }
 }
