@@ -18029,6 +18029,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 768321811906772344, guid: 553e61b6fec81a044a7771d70b8c6d97, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 768321811906772344, guid: 553e61b6fec81a044a7771d70b8c6d97, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 5672463939522820873, guid: 553e61b6fec81a044a7771d70b8c6d97, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 5672463939522820873, guid: 553e61b6fec81a044a7771d70b8c6d97, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 5672463939942578087, guid: 553e61b6fec81a044a7771d70b8c6d97, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 5672463939942578087, guid: 553e61b6fec81a044a7771d70b8c6d97, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 5672463940410133995, guid: 553e61b6fec81a044a7771d70b8c6d97, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5672463940410133995, guid: 553e61b6fec81a044a7771d70b8c6d97, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2
+      objectReference: {fileID: 0}
     - target: {fileID: 5672463940519967065, guid: 553e61b6fec81a044a7771d70b8c6d97, type: 3}
       propertyPath: m_Name
       value: Teleporter

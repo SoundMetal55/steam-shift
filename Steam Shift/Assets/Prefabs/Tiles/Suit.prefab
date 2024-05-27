@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7477656370322923411}
   - component: {fileID: 7477656370322923423}
   - component: {fileID: -7596570741930865909}
+  - component: {fileID: -8366394912934287780}
   m_Layer: 12
   m_Name: Suit
   m_TagString: Suit
@@ -147,6 +148,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &-8366394912934287780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7477656370322923422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2e085bc49cb3ad4d992ac1ec035c5c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  newParent: {fileID: 0}
+  originalParent: {fileID: 0}
 --- !u!1 &7477656371393579352
 GameObject:
   m_ObjectHideFlags: 0

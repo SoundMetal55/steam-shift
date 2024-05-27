@@ -171,7 +171,7 @@ public class Engineer : MonoBehaviour
         if (numPipes > 0)
         {
             RaycastHit2D[] tiles;
-            LayerMask mask = LayerMask.GetMask("SteamBarrier");
+            LayerMask mask = LayerMask.GetMask("PipePlaceable");
             Debug.Log(mask.ToString());
             tiles = Physics2D.CircleCastAll(new Vector2(x, y), 0.5f, new Vector2(0f, 0f), 0.5f, mask);
 
