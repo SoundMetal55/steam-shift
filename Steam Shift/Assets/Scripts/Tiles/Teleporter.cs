@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class Teleporter : MonoBehaviour
 {
-    public GameObject button;
-    public GameObject pointOne;
-    public GameObject pointTwo;
+    public GameObject entrance;
+    public GameObject exit;
 
     void OnTriggerStay2D(Collider2D collision)
     {
-        if (button.GetComponent<PressableButton>().activating.Count != 0)
+        if (entrance.GetComponent<PressableButton>().activating.Contains("Engineer"))
         {
-            collision.transform.position = new Vector3(pointOne.transform.position.x, pointOne.transform.position.y, 2f);
-            collision.transform.position = new Vector3(pointTwo.transform.position.x, pointTwo.transform.position.y, 2f);
+            collision.transform.position = exit.transform.position;
+        }
+        if (entrance.GetComponent<PressableButton>().activating.Contains("Steam"))
+        {
+            collision.transform.position = exit.transform.position;
         }
     }
 }

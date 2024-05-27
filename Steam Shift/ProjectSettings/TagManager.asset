@@ -26,7 +26,7 @@ TagManager:
   - Barrier
   - Pipe
   - Suit
-  - PipeNotPlaceable
+  - PipePlaceable
   - Vent
   - 
   - 
