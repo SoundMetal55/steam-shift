@@ -102,6 +102,7 @@ public class Steam : MonoBehaviour
                 go.layer = LayerMask.NameToLayer("Engineer");
                 isSuit = true;
                 go.transform.localScale = new Vector2(0.8f, 1.6f);
+                isInteracting = false;
             }
         }
         else
@@ -122,6 +123,7 @@ public class Steam : MonoBehaviour
                 go.layer = LayerMask.NameToLayer("Steam");
                 isSuit = false;
                 go.transform.localScale = new Vector2(0.8f, 0.8f);
+                isInteracting = false;
             }
         }
     }

@@ -8,6 +8,7 @@ public class Fan : MonoBehaviour
     public bool isOn;
     public GameObject fanEffect;
     public GameObject button;
+    public int direction;
 
     void Start()
     {
@@ -18,7 +19,7 @@ public class Fan : MonoBehaviour
     void Update()
     {
         fanEffect.SetActive(isOn);
-        isOn = button.GetComponent<PressableButton>().activating.Count != 0;
+        isOn = button.GetComponent<PressableButton>().activating.Count != 0 || button.GetComponent<PressableLever>().activating.Count != 0;
     }
 
     void OnTriggerStay2D(Collider2D collision)
@@ -26,7 +27,22 @@ public class Fan : MonoBehaviour
         if (collision.tag == "Engineer" && isOn)
         {
             Rigidbody2D rb = collision.GetComponent<Rigidbody2D>();
-            rb.AddForce(Vector2.up * 19.62f);
+            if (direction == 0)
+            {
+                rb.AddForce(Vector2.up * 19.62f);
+            }
+            if (direction == 1)
+            {
+                rb.AddForce(Vector2.right * 19.62f);
+            }
+            if (direction == 2)
+            {
+                rb.AddForce(Vector2.down * 19.62f);
+            }
+            if (direction == 3)
+            {
+                rb.AddForce(Vector2.left * 19.62f);
+            }
             rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, rb.velocity.y, 3f));
             Debug.Log("floating");
         }

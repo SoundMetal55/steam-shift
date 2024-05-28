@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -3954410996250811080}
   - component: {fileID: 4398721619229034571}
   - component: {fileID: 5060142231390230114}
+  - component: {fileID: 5096771099645522176}
   m_Layer: 6
   m_Name: Steam
   m_TagString: Steam
@@ -191,3 +192,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   newParent: {fileID: 5092328842607547527}
   originalParent: {fileID: 0}
+--- !u!61 &5096771099645522176
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5092328842607547527}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: b470303d0dd2a4c4b874c3d3d28dfe18, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.025}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.95}
+  m_EdgeRadius: 0

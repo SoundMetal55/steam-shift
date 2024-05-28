@@ -343,7 +343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a91a8ed6f38da8479b90de11b33a747, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  steamColliding: 0
-  steamInteracting: 0
-  engineerColliding: 0
-  engineerInteracting: 0
+  steamActivatable: 0
+  engineerActivatable: 0
+  boxActivatable: 0
+  activating: []
