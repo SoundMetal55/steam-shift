@@ -127,6 +127,7 @@ MonoBehaviour:
   steamActivatable: 1
   engineerActivatable: 1
   boxActivatable: 1
+  isButton: 1
   activating: []
 --- !u!1 &6241662000637982633
 GameObject:

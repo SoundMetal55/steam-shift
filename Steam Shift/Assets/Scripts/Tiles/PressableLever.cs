@@ -2,23 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PressableButton : MonoBehaviour
+public class PressableLever : MonoBehaviour
 {
-    public bool isButton;
+    public bool isLever;
 
     private bool steamColliding;
     private bool engineerColliding;
-    private bool boxColliding;
 
     public bool steamActivatable;
     public bool engineerActivatable;
-    public bool boxActivatable;
 
     public List<string> activating = new List<string>();
 
     void OnTriggerStay2D(Collider2D collision)
     {
-        if (isButton)
+        if (isLever)
         {
             if (collision.tag == "Engineer" && engineerActivatable)
             {
@@ -26,10 +24,12 @@ public class PressableButton : MonoBehaviour
                 if (collision.GetComponent<Engineer>().isInteracting && !activating.Contains("Engineer"))
                 {
                     activating.Add(collision.tag);
+                    collision.GetComponent<Engineer>().isInteracting = false;
                 }
-                else if (!collision.GetComponent<Engineer>().isInteracting)
+                if (collision.GetComponent<Engineer>().isInteracting && activating.Contains("Engineer"))
                 {
-                    activating.Remove(collision.tag);
+                    activating.Clear();
+                    collision.GetComponent<Engineer>().isInteracting = false;
                 }
             }
             if (collision.tag == "Steam" && steamActivatable)
@@ -38,42 +38,28 @@ public class PressableButton : MonoBehaviour
                 if (collision.GetComponent<Steam>().isInteracting && !activating.Contains("Steam"))
                 {
                     activating.Add(collision.tag);
+                    collision.GetComponent<Steam>().isInteracting = false;
                 }
-                else if (!collision.GetComponent<Steam>().isInteracting)
+                if (collision.GetComponent<Steam>().isInteracting && activating.Contains("Steam"))
                 {
-                    activating.Remove(collision.tag);
-                }
-            }
-            if (collision.tag == "Box" && boxActivatable)
-            {
-                boxColliding = true;
-                if (!activating.Contains("Box"))
-                {
-                    activating.Add(collision.tag);
+                    activating.Clear();
+                    collision.GetComponent<Steam>().isInteracting = false;
                 }
             }
         }
-        
-        
     }
+
     void OnTriggerExit2D(Collider2D collision)
     {
-        if (isButton)
+        if (isLever)
         {
             if (collision.tag == "Engineer")
             {
                 engineerColliding = false;
-                activating.Remove(collision.tag);
             }
             if (collision.tag == "Steam")
             {
                 steamColliding = false;
-                activating.Remove(collision.tag);
-            }
-            if (collision.tag == "Box")
-            {
-                boxColliding = false;
-                activating.Remove(collision.tag);
             }
         }
     }

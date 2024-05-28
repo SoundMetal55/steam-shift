@@ -42,7 +42,7 @@ public class Engineer : MonoBehaviour
         rb = engineer.GetComponent<Rigidbody2D>();
         sr = engineer.GetComponent<SpriteRenderer>();
         speed = 5f;
-        jumpForce = 5f;
+        jumpForce = 6.5f;
     }
 
     // Update is called once per frame
