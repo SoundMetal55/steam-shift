@@ -28,6 +28,7 @@ public class Engineer : MonoBehaviour
     [Header("Player Status")]
     public bool isAtGoal;
     public bool isClimbing;
+    public bool isGliding;
     public bool isGrounded = false;
     public bool canJump = false;
     public bool isJumping = false;
@@ -41,7 +42,7 @@ public class Engineer : MonoBehaviour
         go = engineer.GetComponent<GameObject>();
         rb = engineer.GetComponent<Rigidbody2D>();
         sr = engineer.GetComponent<SpriteRenderer>();
-        speed = 5f;
+        speed = 3f;
         jumpForce = 6.5f;
     }
 
@@ -78,6 +79,11 @@ public class Engineer : MonoBehaviour
         {
             rb.gravityScale = 0f;
             rb.velocity = new Vector2(horizontal * speed, vertical * speed);
+        }
+        if (isGliding)
+        {
+            rb.gravityScale = 0.5f;
+            rb.velocity = new Vector2(horizontal * speed * 0.5f, Mathf.Clamp(rb.velocity.y, -1f, 99f));
         }
         else
         {
@@ -143,6 +149,17 @@ public class Engineer : MonoBehaviour
         {
             isInteracting = false;
         }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            if (!isClimbing)
+            {
+                isGliding = true;
+            }
+        }
+        if (Input.GetKeyUp(KeyCode.S))
+        {
+            isGliding = false;
+        }
     }
 
     void SetMovementStatus()
@@ -150,6 +167,7 @@ public class Engineer : MonoBehaviour
         if (colliders.Contains("Ladder"))
         {
             isClimbing = true;
+            isGliding = false;
         }
         else
         {

@@ -12,7 +12,7 @@ public class ParentVelocity : MonoBehaviour
         if (collision.tag == "Engineer")
         {
             Debug.Log("Enter velocity");
-            //originalParent = collision.gameObject.transform.gameObject;
+            originalParent = collision.gameObject.transform.parent.gameObject;
             collision.gameObject.transform.parent = newParent.transform;
         }
     }
