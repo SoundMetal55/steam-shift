@@ -25,6 +25,9 @@ public class PermeableFloor : MonoBehaviour
         if (onFloor && Input.GetKey(KeyCode.S))
         {
             col.enabled = false;
+        }
+        if (Input.GetKeyUp(KeyCode.S))
+        {
             StartCoroutine(EnableCollider());
         }
     }

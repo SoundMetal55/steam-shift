@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 6241662000491403413}
   - component: {fileID: 6241662000491403412}
   - component: {fileID: 6241662000491403414}
-  m_Layer: 8
+  - component: {fileID: 8283979906647337370}
+  m_Layer: 10
   m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,10 +125,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a91a8ed6f38da8479b90de11b33a747, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isButton: 1
   steamActivatable: 1
   engineerActivatable: 1
   boxActivatable: 1
-  isButton: 1
+  activating: []
+--- !u!114 &8283979906647337370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6241662000491403410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec5a84b8ad281ac47911a8607e9458bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLever: 0
+  steamActivatable: 1
+  engineerActivatable: 1
   activating: []
 --- !u!1 &6241662000637982633
 GameObject:
@@ -188,7 +205,7 @@ Transform:
   m_GameObject: {fileID: 6241662000793471692}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0.9, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6241662002405631060}

@@ -34,7 +34,7 @@ public class Steam : MonoBehaviour
         //go = steam.GetComponent<GameObject>();
         rb = steam.GetComponent<Rigidbody2D>();
         sr = steam.GetComponent<SpriteRenderer>();
-        speed = 5f;
+        speed = 3f;
         isSuit = false;
     }
 
