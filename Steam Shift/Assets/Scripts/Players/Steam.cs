@@ -28,6 +28,9 @@ public class Steam : MonoBehaviour
     public bool isSuit;
     public bool isInteracting;
 
+    // needed to connect animations to player movement
+    Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +39,13 @@ public class Steam : MonoBehaviour
         sr = steam.GetComponent<SpriteRenderer>();
         speed = 3f;
         isSuit = false;
+
+        // default the animation to idle
+        animator = GetComponent<Animator>();
+
+        animator.SetBool("horizontal", false);
+        animator.SetBool("isUp", false);
+        animator.SetBool("isDown", false);
     }
 
     // Update is called once per frame
@@ -155,11 +165,11 @@ public class Steam : MonoBehaviour
     {
         if (horizontal < 0f)
         {
-            sr.flipX = false;
+            sr.flipX = true;
         }
         if (horizontal > 0f)
         {
-            sr.flipX = true;
+            sr.flipX = false;
         }
     }
 
@@ -169,27 +179,34 @@ public class Steam : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             horizontal = -1f;
+            animator.SetBool("horizontal", true);
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
             horizontal = 1f;
+            animator.SetBool("horizontal", true);
         }
         else
         {
             horizontal = 0f;
+            animator.SetBool("horizontal", false);
         }
         //vertical movement
         if (Input.GetKey(KeyCode.DownArrow))
         {
             vertical = -1f;
+            animator.SetBool("isDown", true);
         }
         else if (Input.GetKey(KeyCode.UpArrow))
         {
             vertical = 1f;
+            animator.SetBool("isUp", true);
         }
         else
         {
             vertical = 0f;
+            animator.SetBool("isDown", false);
+            animator.SetBool("isUp", false);
         }
         
         if (Input.GetKeyDown(KeyCode.RightControl))
