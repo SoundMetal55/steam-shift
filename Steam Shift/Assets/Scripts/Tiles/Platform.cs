@@ -21,7 +21,7 @@ public class Platform : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        isOn = button.GetComponent<PressableButton>().activating.Count != 0 || button.GetComponent<PressableLever>().activating.Count != 0;
+        isOn = button.GetComponent<PressableButton>().activating.Count != 0 || button.GetComponent<PressableLever>().activating.Count != 0 || button.GetComponent<PressableAutomatic>().isOn;
         if (isOn)
         {
             platform.transform.position = Vector3.MoveTowards(platform.transform.position, pointTwo.transform.position, speed * Time.deltaTime);
