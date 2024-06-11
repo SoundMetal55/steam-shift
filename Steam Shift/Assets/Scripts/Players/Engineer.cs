@@ -36,6 +36,9 @@ public class Engineer : MonoBehaviour
     public ContactFilter2D floorFilter;
     public bool isInteracting;
 
+    // needed to connect animations to player movement
+    Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +47,15 @@ public class Engineer : MonoBehaviour
         sr = engineer.GetComponent<SpriteRenderer>();
         speed = 3f;
         jumpForce = 6.5f;
+
+        // default the animation to idle
+        animator = GetComponent<Animator>();
+
+        animator.SetBool("horizontal", false);
+        animator.SetBool("isJumping", false);
+        animator.SetBool("isInteracting", false);
+        animator.SetBool("isClimbing", false);
+        animator.SetBool("isGliding", false);
     }
 
     // Update is called once per frame
@@ -104,11 +116,11 @@ public class Engineer : MonoBehaviour
     {
         if (horizontal < 0f)
         {
-            sr.flipX = false;
+            sr.flipX = true;
         }
         if (horizontal > 0f)
         {
-            sr.flipX = true;
+            sr.flipX = false;
         }
     }
 
@@ -118,47 +130,69 @@ public class Engineer : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             horizontal = -1f;
+            animator.SetBool("horizontal", true);
         }
         else if (Input.GetKey(KeyCode.D))
         {
             horizontal = 1f;
+            animator.SetBool("horizontal", true);
         }
         else
         {
             horizontal = 0f;
+            animator.SetBool("horizontal", false);
         }
         //vertical movement
         if (Input.GetKey(KeyCode.S))
         {
             vertical = -1f;
+
+            if (colliders.Contains("Ladder"))
+            {
+                animator.SetBool("isClimbing", true);
+            }
         }
         else if (Input.GetKey(KeyCode.W))
         {
             vertical = 1f;
+
+            if (colliders.Contains("Ladder"))
+            {
+                animator.SetBool("isClimbing", true);
+            }
+            else
+            {
+                animator.SetBool("isJumping", true);
+            }
         }
         else
         {
             vertical = 0f;
+            animator.SetBool("isClimbing", false);
         }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
             isInteracting = true;
+            animator.SetBool("isInteracting", true);
         }
         if (Input.GetKeyUp(KeyCode.E))
         {
             isInteracting = false;
+            animator.SetBool("isInteracting", false);
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
             if (!isClimbing)
             {
                 isGliding = true;
+                animator.SetBool("isGliding", true);
             }
         }
         if (Input.GetKeyUp(KeyCode.S))
         {
             isGliding = false;
+            animator.SetBool("isGliding", false);
         }
     }
 
@@ -179,6 +213,7 @@ public class Engineer : MonoBehaviour
         {
             canJump = true;
             isJumping = false;
+            animator.SetBool("isJumping", false);
         }
     }
 
