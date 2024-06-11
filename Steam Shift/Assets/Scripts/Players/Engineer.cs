@@ -100,6 +100,9 @@ public class Engineer : MonoBehaviour
             {
                 canJump = false;
                 isJumping = true;
+                Vector3 vel = rb.velocity;
+                vel.y = 0;
+                rb.velocity = vel;
                 rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             }
         }
@@ -198,14 +201,14 @@ public class Engineer : MonoBehaviour
         {
             RaycastHit2D[] tiles;
             LayerMask mask = LayerMask.GetMask("PipePlaceable");
-            Debug.Log(mask.ToString());
+            //Debug.Log(mask.ToString());
             tiles = Physics2D.CircleCastAll(new Vector2(x, y), 0.5f, new Vector2(0f, 0f), 0.5f, mask);
 
             foreach (RaycastHit2D tile in tiles)
             {
                 Destroy(tile.transform.gameObject);
-                Debug.Log(((tile.transform.gameObject).layer).ToString());
-                Debug.Log(mask.value.ToString());
+                //Debug.Log(((tile.transform.gameObject).layer).ToString());
+                //Debug.Log(mask.value.ToString());
                 pipePlaced = true;
             }
 
