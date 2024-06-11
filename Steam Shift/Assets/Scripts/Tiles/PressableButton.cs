@@ -6,6 +6,8 @@ public class PressableButton : MonoBehaviour
 {
     public bool isButton;
 
+    public bool isPressurePlate;
+
     private bool steamColliding;
     private bool engineerColliding;
     private bool boxColliding;
@@ -18,16 +20,16 @@ public class PressableButton : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D collision)
     {
-        if (isButton)
+        if (isButton || isPressurePlate)
         {
             if (collision.tag == "Engineer" && engineerActivatable)
             {
                 engineerColliding = true;
-                if (collision.GetComponent<Engineer>().isInteracting && !activating.Contains("Engineer"))
+                if ((collision.GetComponent<Engineer>().isInteracting || isPressurePlate) && !activating.Contains("Engineer"))
                 {
                     activating.Add(collision.tag);
                 }
-                else if (!collision.GetComponent<Engineer>().isInteracting)
+                else if (!collision.GetComponent<Engineer>().isInteracting && !isPressurePlate)
                 {
                     activating.Remove(collision.tag);
                 }
@@ -35,11 +37,11 @@ public class PressableButton : MonoBehaviour
             if (collision.tag == "Steam" && steamActivatable)
             {
                 steamColliding = true;
-                if (collision.GetComponent<Steam>().isInteracting && !activating.Contains("Steam"))
+                if ((collision.GetComponent<Steam>().isInteracting || isPressurePlate) && !activating.Contains("Steam"))
                 {
                     activating.Add(collision.tag);
                 }
-                else if (!collision.GetComponent<Steam>().isInteracting)
+                else if (!collision.GetComponent<Steam>().isInteracting && !isPressurePlate)
                 {
                     activating.Remove(collision.tag);
                 }
@@ -58,7 +60,7 @@ public class PressableButton : MonoBehaviour
     }
     void OnTriggerExit2D(Collider2D collision)
     {
-        if (isButton)
+        if (isButton || isPressurePlate)
         {
             if (collision.tag == "Engineer")
             {
