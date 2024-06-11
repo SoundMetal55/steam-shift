@@ -78,12 +78,19 @@ public class Engineer : MonoBehaviour
         if (isClimbing)
         {
             rb.gravityScale = 0f;
-            rb.velocity = new Vector2(horizontal * speed, vertical * speed);
+            if (Input.GetKey(KeyCode.S) == true)
+            {
+                rb.velocity = new Vector2(horizontal * speed, vertical * speed);
+            }
+            else
+            {
+                rb.velocity = new Vector2(horizontal * speed, Mathf.Clamp(vertical * speed, 0f, vertical * speed));
+            }
         }
-        if (isGliding)
+        else if (isGliding)
         {
             rb.gravityScale = 0.5f;
-            rb.velocity = new Vector2(horizontal * speed * 0.5f, Mathf.Clamp(rb.velocity.y, -1f, 99f));
+            rb.velocity = new Vector2(horizontal * speed * 0.5f, Mathf.Clamp(rb.velocity.y, 0f, 50f));
         }
         else
         {
@@ -153,6 +160,7 @@ public class Engineer : MonoBehaviour
         {
             if (!isClimbing)
             {
+                rb.velocity = new Vector2(horizontal * speed * 0.5f, Mathf.Clamp(rb.velocity.y, -jumpForce, jumpForce/2));
                 isGliding = true;
             }
         }

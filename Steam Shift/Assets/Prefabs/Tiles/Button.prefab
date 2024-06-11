@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7192824910039670565}
   - component: {fileID: 5334014429079412585}
   - component: {fileID: 2053306841513751136}
+  - component: {fileID: 6236499269181614612}
   m_Layer: 10
   m_Name: Button
   m_TagString: Untagged
@@ -146,3 +147,18 @@ MonoBehaviour:
   steamActivatable: 0
   engineerActivatable: 0
   activating: []
+--- !u!114 &6236499269181614612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2347605113903277697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6d16ea7bf82d544cab5505de25eb66d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAutomatic: 0
+  seconds: 3
+  isOn: 0
