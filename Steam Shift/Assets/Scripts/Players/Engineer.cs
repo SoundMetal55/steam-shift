@@ -89,8 +89,7 @@ public class Engineer : MonoBehaviour
         }
         else if (isGliding)
         {
-            rb.gravityScale = 0.5f;
-            rb.velocity = new Vector2(horizontal * speed * 0.5f, Mathf.Clamp(rb.velocity.y, 0f, 50f));
+            rb.velocity = new Vector2(horizontal * speed * 0.5f, Mathf.Clamp(rb.velocity.y, -0.2f, 99f));
         }
         else
         {
