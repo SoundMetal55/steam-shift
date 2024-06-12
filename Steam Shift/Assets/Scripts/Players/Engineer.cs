@@ -36,6 +36,8 @@ public class Engineer : MonoBehaviour
     public ContactFilter2D floorFilter;
     public bool isInteracting;
 
+    Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +46,17 @@ public class Engineer : MonoBehaviour
         sr = engineer.GetComponent<SpriteRenderer>();
         speed = 3f;
         jumpForce = 6.5f;
+
+        animator = GetComponent<Animator>();
+
+        animator.SetBool("moving", false);
+        animator.SetBool("climbing", false);
+        animator.SetBool("jumping", false); 
+        animator.SetBool("gliding", false);
+        animator.SetBool("interacting", false);
+        animator.SetBool("pushing", false);
+        animator.SetBool("pulling", false);
+        animator.SetBool("repairing", false);
     }
 
     // Update is called once per frame
@@ -51,6 +64,7 @@ public class Engineer : MonoBehaviour
     {
         GetPlayerInputs();
         SetMovementStatus();
+        SetAnimatorStatus();
     }
     
     void FixedUpdate()
@@ -89,7 +103,7 @@ public class Engineer : MonoBehaviour
         }
         else if (isGliding)
         {
-            rb.velocity = new Vector2(horizontal * speed * 0.5f, Mathf.Clamp(rb.velocity.y, -0.2f, 99f));
+            rb.velocity = new Vector2(horizontal * speed * 0.5f, Mathf.Clamp(rb.velocity.y, -0.3f, 99f));
         }
         else
         {
@@ -190,6 +204,11 @@ public class Engineer : MonoBehaviour
             canJump = true;
             isJumping = false;
         }
+    }
+
+    void SetAnimatorStatus()
+    {
+        animator.SetBool("isUp", true);
     }
 
     public bool CreatePipe(float x, float y)

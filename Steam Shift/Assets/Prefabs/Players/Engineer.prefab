@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1106004305000270635}
   - component: {fileID: 4254218361206191180}
   - component: {fileID: 7439768148945730058}
+  - component: {fileID: 1321609486570192308}
   m_Layer: 7
   m_Name: Engineer
   m_TagString: Engineer
@@ -115,6 +116,7 @@ MonoBehaviour:
   jumpForce: 0
   isAtGoal: 0
   isClimbing: 0
+  isGliding: 0
   isGrounded: 0
   canJump: 0
   isJumping: 0
@@ -239,3 +241,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.95}
   m_EdgeRadius: 0
+--- !u!95 &1321609486570192308
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3728902827064375606}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

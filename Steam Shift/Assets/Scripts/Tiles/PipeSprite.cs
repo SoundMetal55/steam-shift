@@ -33,10 +33,10 @@ public class PipeSprite : MonoBehaviour
         leftTile = Physics2D.CircleCastAll(new Vector2(this.transform.position.x - 1f, this.transform.position.y), 0.5f, new Vector2(0f, 0f), 0.1f, mask);
 
         int connections = 0;
-        if (upTile.Length != 0) { connections += 1; tiles[0] = true; } else { tiles[0] = false; Debug.Log("1"); }
-        if (rightTile.Length != 0) { connections += 1; tiles[1] = true; } else { tiles[1] = false; Debug.Log("1"); }
-        if (downTile.Length != 0) { connections += 1; tiles[2] = true; } else { tiles[2] = false; Debug.Log("1"); }
-        if (leftTile.Length != 0) { connections += 1; tiles[3] = true; } else { tiles[3] = false; Debug.Log("1"); }
+        if (upTile.Length != 0) { connections += 1; tiles[0] = true; } else { tiles[0] = false; }
+        if (rightTile.Length != 0) { connections += 1; tiles[1] = true; } else { tiles[1] = false; }
+        if (downTile.Length != 0) { connections += 1; tiles[2] = true; } else { tiles[2] = false; }
+        if (leftTile.Length != 0) { connections += 1; tiles[3] = true; } else { tiles[3] = false; }
 
         if (connections == 4)
         {
