@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1106004305000270635}
   - component: {fileID: 4254218361206191180}
   - component: {fileID: 7439768148945730058}
-  - component: {fileID: 1321609486570192308}
+  - component: {fileID: 1706995028}
   m_Layer: 7
   m_Name: Engineer
   m_TagString: Engineer
@@ -33,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 3728902827064375606}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -2.5}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
+  m_LocalScale: {x: 0.8, y: 1.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -109,7 +109,7 @@ MonoBehaviour:
   sr: {fileID: 0}
   colliders: []
   pipe: {fileID: 1553060239226734580, guid: 2c406ab6fdafc684587c54c3176bff2b, type: 3}
-  numPipes: 0
+  numPipes: 100
   vent: {fileID: 0}
   numVents: 0
   speed: 0
@@ -241,7 +241,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.95}
   m_EdgeRadius: 0
---- !u!95 &1321609486570192308
+--- !u!95 &1706995028
 Animator:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -251,7 +251,7 @@ Animator:
   m_GameObject: {fileID: 3728902827064375606}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1d9fa7ac83ee3644bb46e32b0007e716, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

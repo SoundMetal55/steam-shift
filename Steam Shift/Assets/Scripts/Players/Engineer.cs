@@ -36,6 +36,7 @@ public class Engineer : MonoBehaviour
     public ContactFilter2D floorFilter;
     public bool isInteracting;
 
+    // needed to connect animations to player movement
     Animator animator;
 
     // Start is called before the first frame update
@@ -47,16 +48,14 @@ public class Engineer : MonoBehaviour
         speed = 3f;
         jumpForce = 6.5f;
 
+        // default the animation to idle
         animator = GetComponent<Animator>();
 
-        animator.SetBool("moving", false);
-        animator.SetBool("climbing", false);
-        animator.SetBool("jumping", false); 
-        animator.SetBool("gliding", false);
-        animator.SetBool("interacting", false);
-        animator.SetBool("pushing", false);
-        animator.SetBool("pulling", false);
-        animator.SetBool("repairing", false);
+        animator.SetBool("horizontal", false);
+        animator.SetBool("isJumping", false);
+        animator.SetBool("isInteracting", false);
+        animator.SetBool("isClimbing", false);
+        animator.SetBool("isGliding", false);
     }
 
     // Update is called once per frame
@@ -64,7 +63,6 @@ public class Engineer : MonoBehaviour
     {
         GetPlayerInputs();
         SetMovementStatus();
-        SetAnimatorStatus();
     }
     
     void FixedUpdate()
@@ -92,18 +90,12 @@ public class Engineer : MonoBehaviour
         if (isClimbing)
         {
             rb.gravityScale = 0f;
-            if (Input.GetKey(KeyCode.S) == true)
-            {
-                rb.velocity = new Vector2(horizontal * speed, vertical * speed);
-            }
-            else
-            {
-                rb.velocity = new Vector2(horizontal * speed, Mathf.Clamp(vertical * speed, 0f, vertical * speed));
-            }
+            rb.velocity = new Vector2(horizontal * speed, vertical * speed);
         }
-        else if (isGliding)
+        if (isGliding)
         {
-            rb.velocity = new Vector2(horizontal * speed * 0.5f, Mathf.Clamp(rb.velocity.y, -0.3f, 99f));
+            rb.gravityScale = 0.5f;
+            rb.velocity = new Vector2(horizontal * speed * 0.5f, Mathf.Clamp(rb.velocity.y, -1f, 99f));
         }
         else
         {
@@ -113,9 +105,6 @@ public class Engineer : MonoBehaviour
             {
                 canJump = false;
                 isJumping = true;
-                Vector3 vel = rb.velocity;
-                vel.y = 0;
-                rb.velocity = vel;
                 rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             }
         }
@@ -127,11 +116,11 @@ public class Engineer : MonoBehaviour
     {
         if (horizontal < 0f)
         {
-            sr.flipX = false;
+            sr.flipX = true;
         }
         if (horizontal > 0f)
         {
-            sr.flipX = true;
+            sr.flipX = false;
         }
     }
 
@@ -141,48 +130,69 @@ public class Engineer : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             horizontal = -1f;
+            animator.SetBool("horizontal", true);
         }
         else if (Input.GetKey(KeyCode.D))
         {
             horizontal = 1f;
+            animator.SetBool("horizontal", true);
         }
         else
         {
             horizontal = 0f;
+            animator.SetBool("horizontal", false);
         }
         //vertical movement
         if (Input.GetKey(KeyCode.S))
         {
             vertical = -1f;
+
+            if (colliders.Contains("Ladder"))
+            {
+                animator.SetBool("isClimbing", true);
+            }
         }
         else if (Input.GetKey(KeyCode.W))
         {
             vertical = 1f;
+
+            if (colliders.Contains("Ladder"))
+            {
+                animator.SetBool("isClimbing", true);
+            }
+            else
+            {
+                animator.SetBool("isJumping", true);
+            }
         }
         else
         {
             vertical = 0f;
+            animator.SetBool("isClimbing", false);
         }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
             isInteracting = true;
+            animator.SetBool("isInteracting", true);
         }
         if (Input.GetKeyUp(KeyCode.E))
         {
             isInteracting = false;
+            animator.SetBool("isInteracting", false);
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
             if (!isClimbing)
             {
-                rb.velocity = new Vector2(horizontal * speed * 0.5f, Mathf.Clamp(rb.velocity.y, -jumpForce, jumpForce/2));
                 isGliding = true;
+                animator.SetBool("isGliding", true);
             }
         }
         if (Input.GetKeyUp(KeyCode.S))
         {
             isGliding = false;
+            animator.SetBool("isGliding", false);
         }
     }
 
@@ -203,12 +213,8 @@ public class Engineer : MonoBehaviour
         {
             canJump = true;
             isJumping = false;
+            animator.SetBool("isJumping", false);
         }
-    }
-
-    void SetAnimatorStatus()
-    {
-        animator.SetBool("isUp", true);
     }
 
     public bool CreatePipe(float x, float y)
@@ -219,14 +225,14 @@ public class Engineer : MonoBehaviour
         {
             RaycastHit2D[] tiles;
             LayerMask mask = LayerMask.GetMask("PipePlaceable");
-            //Debug.Log(mask.ToString());
+            Debug.Log(mask.ToString());
             tiles = Physics2D.CircleCastAll(new Vector2(x, y), 0.5f, new Vector2(0f, 0f), 0.5f, mask);
 
             foreach (RaycastHit2D tile in tiles)
             {
                 Destroy(tile.transform.gameObject);
-                //Debug.Log(((tile.transform.gameObject).layer).ToString());
-                //Debug.Log(mask.value.ToString());
+                Debug.Log(((tile.transform.gameObject).layer).ToString());
+                Debug.Log(mask.value.ToString());
                 pipePlaced = true;
             }
 
