@@ -56,6 +56,9 @@ public class Engineer : MonoBehaviour
         animator.SetBool("isInteracting", false);
         animator.SetBool("isClimbing", false);
         animator.SetBool("isGliding", false);
+        animator.SetBool("isPushing", false);
+        animator.SetBool("isPulling", false);
+        animator.SetBool("isBuilding", false);
     }
 
     // Update is called once per frame
@@ -72,6 +75,11 @@ public class Engineer : MonoBehaviour
         if (Input.GetKey(KeyCode.Q))
         {
             CreatePipe(Mathf.Floor(rb.transform.position.x)+0.5f,Mathf.Floor(rb.transform.position.y)+0.5f);
+            animator.SetBool("isBuilding", true);
+        }
+        else
+        {
+            animator.SetBool("isBuilding", false);
         }
     }
 
