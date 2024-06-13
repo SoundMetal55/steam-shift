@@ -17527,10 +17527,6 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3728902827064375613, guid: 6b2416ea88a40b84a82e42d1f579754c, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3728902827064375613, guid: 6b2416ea88a40b84a82e42d1f579754c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -9
       objectReference: {fileID: 0}
@@ -18528,60 +18524,60 @@ Transform:
   - {fileID: 1449024810}
   - {fileID: 1015058013}
   - {fileID: 198760203}
-  - {fileID: 1847910306}
+  - {fileID: 398526143}
   - {fileID: 644557934}
   - {fileID: 1614804403}
   - {fileID: 2067893867}
   - {fileID: 754248709}
   - {fileID: 1345890932}
-  - {fileID: 398526143}
   - {fileID: 1967484333}
   - {fileID: 1505462202}
+  - {fileID: 1847910306}
   - {fileID: 1364641211}
   - {fileID: 1662883995}
   - {fileID: 409374631}
-  - {fileID: 945009015}
-  - {fileID: 1914072789}
   - {fileID: 1333962954}
-  - {fileID: 557813271}
-  - {fileID: 1547634291}
-  - {fileID: 465843754}
-  - {fileID: 1392374377}
+  - {fileID: 945009015}
   - {fileID: 877082327}
   - {fileID: 1904036864}
   - {fileID: 384390108}
+  - {fileID: 1547634291}
+  - {fileID: 465843754}
+  - {fileID: 1392374377}
+  - {fileID: 557813271}
+  - {fileID: 1914072789}
   - {fileID: 246580417}
   - {fileID: 1033433866}
   - {fileID: 175117176}
   - {fileID: 444913777}
   - {fileID: 1223944308}
+  - {fileID: 1377722984}
   - {fileID: 555510714}
   - {fileID: 1273232642}
+  - {fileID: 1057272892}
   - {fileID: 799631284}
   - {fileID: 1105368008}
   - {fileID: 218376088}
-  - {fileID: 1057272892}
+  - {fileID: 39213194}
   - {fileID: 1425250385}
-  - {fileID: 499654680}
+  - {fileID: 1851436266}
   - {fileID: 465723741}
   - {fileID: 478471423}
-  - {fileID: 1377722984}
-  - {fileID: 39213194}
-  - {fileID: 105517948}
-  - {fileID: 1851436266}
-  - {fileID: 1924013528}
-  - {fileID: 103270944}
-  - {fileID: 826824788}
+  - {fileID: 499654680}
   - {fileID: 606669107}
-  - {fileID: 1903482884}
+  - {fileID: 105517948}
   - {fileID: 1813529625}
+  - {fileID: 103270944}
+  - {fileID: 1924013528}
+  - {fileID: 826824788}
+  - {fileID: 814486151}
+  - {fileID: 1903482884}
   - {fileID: 354823859}
   - {fileID: 2071565370}
   - {fileID: 1040537248}
-  - {fileID: 1667295944}
   - {fileID: 6816413}
   - {fileID: 1966294863}
-  - {fileID: 814486151}
+  - {fileID: 1667295944}
   - {fileID: 1586889953}
   - {fileID: 584067032}
   m_Father: {fileID: 233528973}
